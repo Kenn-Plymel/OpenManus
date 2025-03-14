@@ -13,6 +13,7 @@ from tenacity import retry, stop_after_attempt, wait_random_exponential
 from app.config import LLMSettings, config
 from app.logger import logger  # Assuming a logger is set up in your app
 from app.schema import Message, TOOL_CHOICE_TYPE, ROLE_VALUES, TOOL_CHOICE_VALUES, ToolChoice
+from app.anthropic_client import AnthropicClient
 
 
 class LLM:
@@ -40,14 +41,23 @@ class LLM:
             self.api_key = llm_config.api_key
             self.api_version = llm_config.api_version
             self.base_url = llm_config.base_url
-            if self.api_type == "azure":
+            
+            # Determine if this is an Anthropic client based on the URL
+            self.is_anthropic = "anthropic" in (self.base_url or "").lower()
+            
+            if self.is_anthropic:
+                self.client = AnthropicClient(api_key=self.api_key, base_url=self.base_url)
+                logger.info(f"Initialized Anthropic client with model {self.model}")
+            elif self.api_type == "azure":
                 self.client = AsyncAzureOpenAI(
                     base_url=self.base_url,
                     api_key=self.api_key,
                     api_version=self.api_version,
                 )
+                logger.info(f"Initialized Azure OpenAI client with model {self.model}")
             else:
-                self.client = AsyncOpenAI(api_key=self.api_key, base_url=self.base_url)
+                self.client = AsyncOpenAI(api_key=self.api_key, base_url=self.base_url)  
+                logger.info(f"Initialized OpenAI client with model {self.model}")
 
     @staticmethod
     def format_messages(messages: List[Union[dict, Message]]) -> List[dict]:
@@ -133,6 +143,17 @@ class LLM:
             else:
                 messages = self.format_messages(messages)
 
+            # Use Anthropic client if detected
+            if self.is_anthropic:
+                return await self.client.create_message(
+                    messages=messages,
+                    max_tokens=self.max_tokens,
+                    temperature=temperature or self.temperature,
+                    stream=stream,
+                    model=self.model
+                )
+
+            # OpenAI client logic
             if not stream:
                 # Non-streaming request
                 response = await self.client.chat.completions.create(
@@ -186,79 +207,4 @@ class LLM:
         messages: List[Union[dict, Message]],
         system_msgs: Optional[List[Union[dict, Message]]] = None,
         timeout: int = 300,
-        tools: Optional[List[dict]] = None,
-        tool_choice: TOOL_CHOICE_TYPE = ToolChoice.AUTO, # type: ignore
-        temperature: Optional[float] = None,
-        **kwargs,
-    ):
-        """
-        Ask LLM using functions/tools and return the response.
-
-        Args:
-            messages: List of conversation messages
-            system_msgs: Optional system messages to prepend
-            timeout: Request timeout in seconds
-            tools: List of tools to use
-            tool_choice: Tool choice strategy
-            temperature: Sampling temperature for the response
-            **kwargs: Additional completion arguments
-
-        Returns:
-            ChatCompletionMessage: The model's response
-
-        Raises:
-            ValueError: If tools, tool_choice, or messages are invalid
-            OpenAIError: If API call fails after retries
-            Exception: For unexpected errors
-        """
-        try:
-            # Validate tool_choice
-            if tool_choice not in TOOL_CHOICE_VALUES:
-                raise ValueError(f"Invalid tool_choice: {tool_choice}")
-
-            # Format messages
-            if system_msgs:
-                system_msgs = self.format_messages(system_msgs)
-                messages = system_msgs + self.format_messages(messages)
-            else:
-                messages = self.format_messages(messages)
-
-            # Validate tools if provided
-            if tools:
-                for tool in tools:
-                    if not isinstance(tool, dict) or "type" not in tool:
-                        raise ValueError("Each tool must be a dict with 'type' field")
-
-            # Set up the completion request
-            response = await self.client.chat.completions.create(
-                model=self.model,
-                messages=messages,
-                temperature=temperature or self.temperature,
-                max_tokens=self.max_tokens,
-                tools=tools,
-                tool_choice=tool_choice,
-                timeout=timeout,
-                **kwargs,
-            )
-
-            # Check if response is valid
-            if not response.choices or not response.choices[0].message:
-                print(response)
-                raise ValueError("Invalid or empty response from LLM")
-
-            return response.choices[0].message
-
-        except ValueError as ve:
-            logger.error(f"Validation error in ask_tool: {ve}")
-            raise
-        except OpenAIError as oe:
-            if isinstance(oe, AuthenticationError):
-                logger.error("Authentication failed. Check API key.")
-            elif isinstance(oe, RateLimitError):
-                logger.error("Rate limit exceeded. Consider increasing retry attempts.")
-            elif isinstance(oe, APIError):
-                logger.error(f"API error: {oe}")
-            raise
-        except Exception as e:
-            logger.error(f"Unexpected error in ask_tool: {e}")
-            raise
+        tools: Optional[List
