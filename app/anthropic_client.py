@@ -79,6 +79,13 @@ class AnthropicClient:
         self,
         messages: List[dict],
         max_tokens: int = 4096,
+
+       # Add this right before the API call in create_message method
+        print(f"DEBUG: Using Anthropic API key: {'*' * (len(self.client.api_key) - 4) + self.client.api_key[-4:]}")
+        print(f"DEBUG: Base URL: {self.client.base_url}")
+        print(f"DEBUG: Using model: {params['model']}") 
+
+        
         temperature: float = 0.0,
         stream: bool = False,
         system_prompt: Optional[str] = None,
