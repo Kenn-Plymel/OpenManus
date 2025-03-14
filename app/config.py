@@ -14,6 +14,15 @@ load_dotenv()
 # Load config from file
 config = toml.load("config/config.toml")
 
+# Add debug statement for API key loading
+if "ANTHROPIC_API_KEY" in os.environ:
+    print(f"DEBUG: Found ANTHROPIC_API_KEY in environment with length {len(os.environ['ANTHROPIC_API_KEY'])}")
+    config["llm"]["api_key"] = os.environ["ANTHROPIC_API_KEY"]
+    if "vision" in config["llm"]:
+        config["llm"]["vision"]["api_key"] = os.environ["ANTHROPIC_API_KEY"]
+else:
+    print("DEBUG: ANTHROPIC_API_KEY not found in environment")
+
 # Override API keys with environment variables if available
 if "ANTHROPIC_API_KEY" in os.environ:
     config["llm"]["api_key"] = os.environ["ANTHROPIC_API_KEY"]
