@@ -1,0 +1,28 @@
+<!-- Model selection dropdown -->
+<select name="model_name" id="model_name" class="form-control">
+    <optgroup label="OpenAI Models">
+        <option value="gpt-4o" {% if session.model_name == 'gpt-4o' %}selected{% endif %}>GPT-4o</option>
+        <option value="gpt-4-turbo" {% if session.model_name == 'gpt-4-turbo' %}selected{% endif %}>GPT-4 Turbo</option>
+        <option value="gpt-3.5-turbo" {% if session.model_name == 'gpt-3.5-turbo' %}selected{% endif %}>GPT-3.5 Turbo</option>
+    </optgroup>
+    <optgroup label="Anthropic Models">
+        <option value="claude-3-opus-20240229" {% if session.model_name == 'claude-3-opus-20240229' %}selected{% endif %}>Claude 3 Opus</option>
+        <option value="claude-3-sonnet-20240229" {% if session.model_name == 'claude-3-sonnet-20240229' %}selected{% endif %}>Claude 3 Sonnet</option>
+        <option value="claude-3-haiku-20240307" {% if session.model_name == 'claude-3-haiku-20240307' %}selected{% endif %}>Claude 3 Haiku</option>
+    </optgroup>
+</select>
+
+<!-- Model family selection -->
+<div class="form-group">
+    <label>Model Provider:</label>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="model_family" id="openai" value="openai" 
+               {% if session.model_family == 'openai' %}checked{% endif %}>
+        <label class="form-check-label" for="openai">OpenAI</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="model_family" id="anthropic" value="anthropic"
+               {% if session.model_family == 'anthropic' %}checked{% endif %}>
+        <label class="form-check-label" for="anthropic">Anthropic</label>
+    </div>
+</div>

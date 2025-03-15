@@ -30,7 +30,7 @@ setup(
         "unidiff~=0.7.5",
         "browser-use~=0.1.40",
         "googlesearch-python~=1.3.0",
-        "aiofiles~=24.1.0",
+        "aiofiles<24.0 and >=22.0",
         "pydantic_core~=2.27.2",
         "colorama~=0.4.6",
     ],

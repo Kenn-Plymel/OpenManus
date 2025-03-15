@@ -1,0 +1,295 @@
+INFO     [browser_use] BrowserUse logging setup complete with level info
+INFO     [root] Anonymized telemetry enabled. See https://docs.browser-use.com/development/telemetry for more information.
+Enter your prompt: 2025-03-14 08:34:16.620 | WARNING  | __main__:main:15 - Processing your request...
+2025-03-14 08:34:16.621 | INFO     | app.agent.base:run:137 - Executing step 1/20
+2025-03-14 08:34:18.560 | ERROR    | app.llm:ask_tool:260 - API error: Connection error.
+2025-03-14 08:34:21.421 | ERROR    | app.llm:ask_tool:260 - API error: Connection error.
+2025-03-14 08:34:24.909 | ERROR    | app.llm:ask_tool:260 - API error: Connection error.
+2025-03-14 08:34:29.858 | ERROR    | app.llm:ask_tool:260 - API error: Connection error.
+2025-03-14 08:34:38.016 | ERROR    | app.llm:ask_tool:260 - API error: Connection error.
+2025-03-14 08:34:55.527 | ERROR    | app.llm:ask_tool:260 - API error: Connection error.
+Traceback (most recent call last):
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_exceptions.py", line 10, in map_exceptions
+    yield
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 142, in _send_request_headers
+    event = h11.Request(
+            ^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/h11/_events.py", line 96, in __init__
+    self, "headers", normalize_and_validate(headers, _parsed=_parsed)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/h11/_headers.py", line 164, in normalize_and_validate
+    validate(_field_value_re, value, "Illegal header value {!r}", value)
+  File "/home/kplymel/.local/lib/python3.12/site-packages/h11/_util.py", line 91, in validate
+    raise LocalProtocolError(msg)
+h11._util.LocalProtocolError: Illegal header value b'Bearer '
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 268, in handle_async_request
+    raise exc
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 251, in handle_async_request
+    response = await connection.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 133, in handle_async_request
+    raise exc
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 92, in handle_async_request
+    await self._send_request_headers(**kwargs)
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 141, in _send_request_headers
+    with map_exceptions({h11.LocalProtocolError: LocalProtocolError}):
+  File "/home/kplymel/miniconda3/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.LocalProtocolError: Illegal header value b'Bearer '
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/_base_client.py", line 1576, in _request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "/home/kplymel/miniconda3/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.LocalProtocolError: Illegal header value b'Bearer '
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_exceptions.py", line 10, in map_exceptions
+    yield
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 142, in _send_request_headers
+    event = h11.Request(
+            ^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/h11/_events.py", line 96, in __init__
+    self, "headers", normalize_and_validate(headers, _parsed=_parsed)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/h11/_headers.py", line 164, in normalize_and_validate
+    validate(_field_value_re, value, "Illegal header value {!r}", value)
+  File "/home/kplymel/.local/lib/python3.12/site-packages/h11/_util.py", line 91, in validate
+    raise LocalProtocolError(msg)
+h11._util.LocalProtocolError: Illegal header value b'Bearer '
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 268, in handle_async_request
+    raise exc
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 251, in handle_async_request
+    response = await connection.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 133, in handle_async_request
+    raise exc
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 92, in handle_async_request
+    await self._send_request_headers(**kwargs)
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 141, in _send_request_headers
+    with map_exceptions({h11.LocalProtocolError: LocalProtocolError}):
+  File "/home/kplymel/miniconda3/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.LocalProtocolError: Illegal header value b'Bearer '
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/_base_client.py", line 1576, in _request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "/home/kplymel/miniconda3/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.LocalProtocolError: Illegal header value b'Bearer '
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_exceptions.py", line 10, in map_exceptions
+    yield
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 142, in _send_request_headers
+    event = h11.Request(
+            ^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/h11/_events.py", line 96, in __init__
+    self, "headers", normalize_and_validate(headers, _parsed=_parsed)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/h11/_headers.py", line 164, in normalize_and_validate
+    validate(_field_value_re, value, "Illegal header value {!r}", value)
+  File "/home/kplymel/.local/lib/python3.12/site-packages/h11/_util.py", line 91, in validate
+    raise LocalProtocolError(msg)
+h11._util.LocalProtocolError: Illegal header value b'Bearer '
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 268, in handle_async_request
+    raise exc
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 251, in handle_async_request
+    response = await connection.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 133, in handle_async_request
+    raise exc
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 92, in handle_async_request
+    await self._send_request_headers(**kwargs)
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_async/http11.py", line 141, in _send_request_headers
+    with map_exceptions({h11.LocalProtocolError: LocalProtocolError}):
+  File "/home/kplymel/miniconda3/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/kplymel/.local/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.LocalProtocolError: Illegal header value b'Bearer '
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/_base_client.py", line 1576, in _request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "/home/kplymel/miniconda3/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.LocalProtocolError: Illegal header value b'Bearer '
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 114, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/Documents/OpenManus/app/llm.py", line 233, in ask_tool
+    response = await self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/resources/chat/completions.py", line 1720, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/_base_client.py", line 1843, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/_base_client.py", line 1537, in request
+    return await self._request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/_base_client.py", line 1600, in _request
+    return await self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/_base_client.py", line 1670, in _retry_request
+    return await self._request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/_base_client.py", line 1600, in _request
+    return await self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/_base_client.py", line 1670, in _retry_request
+    return await self._request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/openai/_base_client.py", line 1610, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kplymel/Documents/OpenManus/main.py", line 23, in <module>
+    asyncio.run(main())
+  File "/home/kplymel/miniconda3/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/asyncio/base_events.py", line 685, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/kplymel/Documents/OpenManus/main.py", line 16, in main
+    await agent.run(prompt)
+  File "/home/kplymel/Documents/OpenManus/app/agent/base.py", line 138, in run
+    step_result = await self.step()
+                  ^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/Documents/OpenManus/app/agent/react.py", line 35, in step
+    should_act = await self.think()
+                 ^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/Documents/OpenManus/app/agent/toolcall.py", line 44, in think
+    response = await self.llm.ask_tool(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 189, in async_wrapped
+    return await copy(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 111, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 153, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/tenacity/_utils.py", line 99, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kplymel/miniconda3/lib/python3.12/site-packages/tenacity/__init__.py", line 419, in exc_check
+    raise retry_exc from fut.exception()
+tenacity.RetryError: RetryError[<Future at 0x7f3c12c1d220 state=finished raised APIConnectionError>]
