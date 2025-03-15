@@ -1,5 +1,7 @@
 #Security purposes:
 .env  #Yes, it was already listed below.
+# Session Data / Flask, but others could be added
+flask_session/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
